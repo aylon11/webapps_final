@@ -9,6 +9,7 @@ import Default from './components/Default';
 import SignIn from './components/SignIn';
 import Modal from './components/Modal';
 import AboutUs from './components/AboutUs';
+import Register from './components/Register';
 import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/about" component={AboutUs}></Route>
           <Route path="/details" component={Details}></Route>
           <Route path="/cart" component={Cart}></Route>
+          <Route path="/register" component={Register}></Route>
           <Route component={Default}></Route>
         </Switch>
         <Modal />
