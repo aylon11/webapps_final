@@ -1,0 +1,58 @@
+:root {
+  --mainBlue: #118ab2;
+  --mainDarkBlue: #0c569b;
+  --mainGreen: #90be6d;
+  --mainRed: #d8315b;
+  --mainYellow: #ffc857;
+  --mainPurple: #6a4c93;
+  --mainOrange: #fe7f2d;
+  --mainWhite: #ffff;
+}
+
+body {
+  font-family: "Alata", sans-serif !important;
+  background: var(--mainWhite) !important;
+  color: black !important;
+}
+
+.text-title {
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+}
+
+.text-black {
+  color: black;
+  font-size: 2rem;
+}
+
+.text-blue {
+  color: var(--mainBlue);
+  font-size: 2rem;
+}
+
+.text-red {
+  color: var(--mainRed);
+  font-size: 2rem;
+}
+
+.text-white {
+  color: var(--mainWhite);
+}
+
+.btn-black {
+  background: transparent;
+  text-transform: capitalize;
+  font-size: 0.8ren !important;
+  color: var(--mainDarkBlue);
+  border-radius: 0 !important;
+  border: 0.1rem solid var(--mainDarkBlue);
+}
+
+.search-bar {
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 2px solid var(--mainGreen);
+  border-radius: 17px;
+  width: 31%;
+  outline: none;
+}

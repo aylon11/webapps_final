@@ -1,0 +1,21 @@
+.btn-plus-minus {
+    background: var(--mainPurple);
+    text-transform: capitalize;
+    font-size: 0.8rem !important;
+    color: white;
+    border-radius: 5 !important;
+    height: 2rem;
+    width: 2rem;
+    text-align: center;
+    padding: 5px;
+}
+
+.btn-plus-minus:hover {
+    box-shadow: 0px 0px 8px #adb5bd;
+}
+
+.cart-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--mainGreen);
+}
