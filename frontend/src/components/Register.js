@@ -13,11 +13,32 @@ export default function Register() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    var _body = {
+      id: "Eylon",
+      pwd: "test",
+      first_name: name,
+      last_name: password,
+      email: "a",
+      phone: "a"
+    }
     debugger;
+    fetch('http://localhost:4000/user/add', {
+      method: 'post',
+      body: JSON.stringify(_body),
+      headers: { Accept: "application/json",
+      "Content-Type": "application/json" 
+    }
+    }).then(function (response) {
+      debugger;
+      return response.json();
+    }).then(function (data) {
+      debugger;
+      console.log("error");
+    });
   }
 
   return (
-    <div className="Login col-10 mx-auto text-center text-title" style={{width: "40%", marginTop: "5%"}}>
+    <div className="Login col-10 mx-auto text-center text-title" style={{ width: "40%", marginTop: "5%" }}>
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Name</ControlLabel>
@@ -44,7 +65,7 @@ export default function Register() {
             type="password"
           />
         </FormGroup>
-        <ButtonContainer style={{background: "var(--mainBlue)"}} block bsSize="large" disabled={!validateForm()} type="submit">
+        <ButtonContainer style={{ background: "var(--mainBlue)" }} block bsSize="large" disabled={!validateForm()} type="submit">
           Login
         </ButtonContainer>
       </form>

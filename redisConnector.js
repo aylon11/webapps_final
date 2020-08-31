@@ -30,13 +30,16 @@ exports.get_all_users = (req, res, next) => {
 exports.add_user = (req, res, next) => {
   // post Parameters
   let id = req.body.id
-  let first_name = req.body.pwd
-//   let last_name = req.body.last_name
-//   let email = req.body.email
-//   let phone = req.body.phone
+  let pwd = req.body.pwd
+  let first_name = req.body.first_name
+  let last_name = req.body.last_name
+  let email = req.body.email
+  let phone = req.body.phone
 
+  console.log(req.body);
   // make id the key and assign the id to the other Parameters
   client.hmset(id,[
+    'pwd', pwd,
     'first_name', first_name,
     'last_name', last_name,
     'email', email,

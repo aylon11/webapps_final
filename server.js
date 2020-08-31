@@ -5,11 +5,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const redis = require('redis');
 const { send } = require('process');
-
+const cors = require('cors');
 
 const port = 4000;
 
 const app = express();
+app.use(cors());
 
 let routes = './Routes/api'
 
