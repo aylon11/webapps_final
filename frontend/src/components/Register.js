@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { ButtonContainer } from './Button';
+import AuthApi from "../AuthApi";
+import isRegApi from "../isRegApi"
+import Cookies from "js-cookie"
+
 
 export default function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const Auth = React.useContext(AuthApi)
+  const Reg = React.useContext(isRegApi)
+
 
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
@@ -14,14 +21,9 @@ export default function Register() {
   function handleSubmit(event) {
     event.preventDefault();
     var _body = {
-      id: "Eylon",
-      pwd: "test",
-      first_name: name,
-      last_name: password,
-      email: "a",
-      phone: "a"
+      id: name,
+      pwd: password,
     }
-    debugger;
     fetch('http://localhost:4000/user/add', {
       method: 'post',
       body: JSON.stringify(_body),
@@ -29,12 +31,16 @@ export default function Register() {
       "Content-Type": "application/json" 
     }
     }).then(function (response) {
-      debugger;
+      if (response.status === 200){
+        Auth.setAuth(true)
+        Reg.setRegPage(false)
+        Cookies.set("user",name, {expires:7})
+        console.log('set auth to true')
+      }
       return response.json();
-    }).then(function (data) {
-      debugger;
-      console.log("error");
-    });
+    }).then(()=>{
+      window.location.href="http://localhost:3000/products"
+    })
   }
 
   return (
