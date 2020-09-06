@@ -13,11 +13,35 @@ class ProductProvider extends Component {
         cartSubTotal: 0,
         cartTax: 0,
         cartTotal: 0,
+        userName: "Dananana",
+        isNavBar: true,
     };
 
     componentDidMount() {
         this.setProducts();
     }
+
+    // getUserData = () => {
+    //     fetch('http://localhost:4000/user/add', {
+    //         method: 'get',
+    //         body: JSON.stringify(_body),
+    //         headers: {
+    //             Accept: "application/json",
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    // }
+
+    // setUserCart = () => {
+    //     fetch('http://localhost:4000/user/add', {
+    //         method: 'post',
+    //         body: JSON.stringify(_body),
+    //         headers: {
+    //             Accept: "application/json",
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    // }
 
     setProducts = () => {
         let tempProducts = [];

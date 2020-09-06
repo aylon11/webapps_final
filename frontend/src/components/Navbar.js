@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo1.png'
 import { ButtonContainer } from './Button';
 import Cookies from "js-cookie"
+import { ProductConsumer } from '../context';
 
 export default class NavBar extends Component {
     render() {
@@ -32,24 +33,28 @@ export default class NavBar extends Component {
                     </ButtonContainer>
                 </Link>
                 <Link to="/Register">
-                    <ButtonContainer  onClick={signOut} style={{ color: "var(--mainRed)", marginLeft: "20px", fontSize: "1.2rem" }}>
+                    <ButtonContainer onClick={signOut} style={{ color: "var(--mainRed)", marginLeft: "20px", fontSize: "1.2rem" }}>
                         <span className="mr-3">
                             <i className="fas fa-sign-in-alt"></i>
                         </span>
                         Sign Out
                     </ButtonContainer>
                 </Link>
-                <div style={{ marginLeft: "40px" }}>
-                    <span style={{ fontSize: "1.2rem", color: "var(--mainDarkBlue)" }}>Hello,</span><br />
-                    <span style={{ fontSize: "1rem" }}>User Name</span>
-                </div>
+                <ProductConsumer>
+                    {(value) => (
+                        <div style={{ marginLeft: "40px" }}>
+                            <span style={{ fontSize: "1.2rem", color: "var(--mainDarkBlue)" }}>Hello,</span><br />
+                            <span style={{ fontSize: "1rem" }}>{value.userName}</span>
+                        </div>
+                    )}
+                </ProductConsumer>
             </nav>
         )
     }
 }
 
-function signOut(){
+function signOut() {
     Cookies.remove('user');
-    
-    window.location.href="http://localhost:3000/register"
+
+    window.location.href = "http://localhost:3000/register"
 }
