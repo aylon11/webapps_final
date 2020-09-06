@@ -13,6 +13,7 @@ export default function Register() {
   const Auth = React.useContext(AuthApi)
 
 
+
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
   }
@@ -39,6 +40,9 @@ export default function Register() {
       }
       return response.json();
     }).then((data)=>{
+
+      
+
       console.log(data['name'])
       window.location.href="http://localhost:3000/products"
     })
