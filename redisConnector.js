@@ -1,6 +1,8 @@
 let redis = require('redis')  // Require Redis
 const e = require('express')
 let client = redis.createClient() // Create a new redis instance
+let login_time = new Date()
+
 
 
 exports.get_all_users = (req, res, next) => {
@@ -39,7 +41,7 @@ exports.add_user = (req, res, next) => {
         res.send('User name already exists')
     }
     else{
-        client.hmset(id,['pwd',pwd,'cart',cart], function(err,reply){
+        client.hmset(id,['pwd',pwd,'cart',cart,'create_time',login_time], function(err,reply){
             if (err){
                 console.log(err)
             }
@@ -66,36 +68,35 @@ exports.delete_user = (req, res, next) => {
 
 exports.get_user = (req, res, next) => {
   // id from url Parameter
-  let id = req.params.id
+  let id = req.body.id
+  let pwd = req.body.pwd
 
   // get all values associated with the key as id
   client.hgetall(id, (err, obj) => {
     if (!obj) {
       res.send('User does not exist') // if no user is associated with that id/key return this
-    } else {
-      obj.id = id
-
-      res.send({
-        'user': obj // if user is found return details
-      })
+    } else {    
+      if (obj.pwd == pwd){
+        res.send({
+          'user': obj // if user is found return details
+        })
+      }
+      else{
+        res.status(404);
+        res.send('Wrong Password')
+      }
     }
   })
 }
 
 exports.update_user = (req, res, next) => {
   // put Parameters
-  let id = req.params.id
-  let first_name = req.body.first_name
-  let last_name = req.body.last_name
-  let email = req.body.email
-  let phone = req.body.phone
+  let id = req.body.id
+  let cart = req.body.cart
 
   // make id the key and assign the id to the other Parameters
-  client.hmset(id, [
-    'first_name', first_name,
-    'last_name', last_name,
-    'email', email,
-    'phone', phone
+  client.hset(id, [
+    'cart', cart
   ], (err, reply) => {
     if (err) {
       console.log(err)  // callback to log errors
@@ -105,6 +106,7 @@ exports.update_user = (req, res, next) => {
     res.send("User updated successfully") // response to client
   })
 }
+
 
 exports.sign_in = (req, res, next) => {
   let id = req.body.id

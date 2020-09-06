@@ -17,10 +17,10 @@ Route.post('/user/add', redis.add_user)
 Route.delete('/user/delete/:id', redis.delete_user)
 
 // get a user by id
-Route.get('/user/:id', redis.get_user)
+Route.post('/user/:id', redis.get_user)
 
 // update a user by id
-Route.put('/user/update/:id', redis.update_user)
+Route.put('/user/update', redis.update_user)
 
 // sign-in user
 Route.post('/user/sign-in', redis.sign_in)
