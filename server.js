@@ -23,7 +23,10 @@ client.on('connect', function(err){
     }
     else{
     console.log('Connected to Redis')
-    client.hmset('admin',['password','admin'], function(err){
+    client.flushdb( function (err, succeeded) {
+        console.log(succeeded); // will be true if successfull
+    });
+    client.hmset('admin',['pwd','admin'], function(err){
         if(err){
             console.log('Error in creating admin user ' + err)
         }
@@ -33,6 +36,8 @@ client.on('connect', function(err){
     });
     }
 });
+
+
 
 
 // Security measure - limit connections (DDoS)

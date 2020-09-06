@@ -27,32 +27,30 @@ exports.get_all_users = (req, res, next) => {
   })
 }
 
+
 exports.add_user = (req, res, next) => {
-  // post Parameters
+  // Sign up a new user
   let id = req.body.id
   let pwd = req.body.pwd
-  let first_name = req.body.first_name
-  let last_name = req.body.last_name
-  let email = req.body.email
-  let phone = req.body.phone
+  let cart = String([])
 
-  console.log(req.body);
-  // make id the key and assign the id to the other Parameters
-  client.hmset(id,[
-    'pwd', pwd,
-    'first_name', first_name,
-    'last_name', last_name,
-    'email', email,
-    'phone', phone
-  ], (err, reply) => {
-    if (err) {
-      console.log(err)  // callback to log errors
+  client.hgetall(id, function(err,obj){
+    if (obj){
+        res.send('User name already exists')
     }
-
-    console.log(reply)  // log success message
-    res.send('User added successfully') // response back to the client
-  });
+    else{
+        client.hmset(id,['pwd',pwd,'cart',cart], function(err,reply){
+            if (err){
+                console.log(err)
+            }
+            console.log(reply);
+            // redirect to home page after registration
+            res.send('new user added');
+        })
+    }
+  })
 }
+
 
 exports.delete_user = (req, res, next) => {
   // find key associated with the id and deletes it
@@ -109,22 +107,22 @@ exports.update_user = (req, res, next) => {
 }
 
 exports.sign_in = (req, res, next) => {
-    let name = req.params.id
-    let pwd = req.body.pwd
-    client.hgetall(name, function(err,obj){
-                if (obj){
-                    if(obj.password === pwd){
-                        res.status(200)
-                        res.send()
-                    }
-                    else{
-                        res.status(404) // wrong pwd
-                        res.send('wrong Password')
-                    }
-                }
-                else{
-                    res.status(400) // User doesn't exist
-                    res.send('User doesnt exist')
-                }
-    })
+  let id = req.body.id
+  let pwd = req.body.pwd
+  client.hgetall(id, function(err,obj){
+    if (obj){
+      if(obj.pwd === pwd){
+          res.status(200)
+          res.send(obj)
+      }
+      else{
+          res.status(404) // wrong pwd
+          res.send('wrong Password')
+      }
+    }
+    else{
+        res.status(400) // User doesn't exist
+        res.send('User doesnt exist')
+    }
+  })
 }

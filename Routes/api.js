@@ -23,6 +23,6 @@ Route.get('/user/:id', redis.get_user)
 Route.put('/user/update/:id', redis.update_user)
 
 // sign-in user
-Route.post('/user/sign-in/:id', redis.sign_in)
+Route.post('/user/sign-in', redis.sign_in)
 
 module.exports = Route
