@@ -69,7 +69,7 @@ export default function Register() {
             type="password"
           />
         </FormGroup>
-        <ButtonContainer style={{ background: "var(--mainBlue)" }} block bsSize="large" disabled={!validateForm()} type="submit">
+        <ButtonContainer style={{ background: "var(--mainOrange)" }} block bsSize="large" disabled={!validateForm()} type="submit">
           Login
         </ButtonContainer>
 
