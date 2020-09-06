@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
 import Cookies from "js-cookie";
-import { ProductConsumer } from '../context';
+import { ProductConsumer, setName } from '../context';
 
 
 export default function Register() {
@@ -12,11 +12,13 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
   const Auth = React.useContext(AuthApi)
 
+  const[context,setContext] = useContext(Context)
+
 
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
   }
-
+ 
   function handleSubmit(event) {
     event.preventDefault();
     var _body = {
@@ -33,12 +35,14 @@ export default function Register() {
     }).then(function (response) {
       if (response.status === 200) {
         Auth.setAuth(true)
-        // Reg.setRegPage(false)
         Cookies.set("user", name, { expires: 7 })
         console.log('set auth to true')
       }
       return response.json();
     }).then((data)=>{
+      setName(data['name'])
+      // data['name']
+      // data['cart']
       console.log(data['name'])
       window.location.href="http://localhost:3000/products"
     })

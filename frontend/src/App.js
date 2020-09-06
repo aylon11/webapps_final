@@ -14,6 +14,8 @@ import AuthApi from "./AuthApi";
 import Cookies from "js-cookie";
 import { ProductConsumer } from './context'
 
+const userName = React.createContext("user")
+const cart = React.createContext("[]")
 
 function App() {
 

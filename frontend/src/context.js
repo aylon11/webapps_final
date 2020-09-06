@@ -172,6 +172,15 @@ class ProductProvider extends Component {
         })
     }
 
+    setName = (name) =>{
+        this.setState(() =>{
+            return{
+            userName : name
+            }   
+         }
+        )
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
@@ -184,6 +193,7 @@ class ProductProvider extends Component {
                 decrement: this.decrement,
                 removeItem: this.removeItem,
                 clearCart: this.clearCart,
+                setName: this.setName,
             }}>
                 {this.props.children}
             </ProductContext.Provider>
