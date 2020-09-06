@@ -21,28 +21,6 @@ class ProductProvider extends Component {
         this.setProducts();
     }
 
-    // getUserData = () => {
-    //     fetch('http://localhost:4000/user/add', {
-    //         method: 'get',
-    //         body: JSON.stringify(_body),
-    //         headers: {
-    //             Accept: "application/json",
-    //             "Content-Type": "application/json"
-    //         }
-    //     })
-    // }
-
-    // setUserCart = () => {
-    //     fetch('http://localhost:4000/user/add', {
-    //         method: 'post',
-    //         body: JSON.stringify(_body),
-    //         headers: {
-    //             Accept: "application/json",
-    //             "Content-Type": "application/json"
-    //         }
-    //     })
-    // }
-
     setProducts = () => {
         let tempProducts = [];
         storeProducts.forEach(item => {

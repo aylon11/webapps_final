@@ -15,6 +15,7 @@ export default function Register() {
   const[context,setContext] = useContext(Context)
 
 
+
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
   }
