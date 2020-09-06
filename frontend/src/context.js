@@ -152,6 +152,7 @@ class ProductProvider extends Component {
 
     setName = (name) =>{
         this.setState(() =>{
+
             return{
             userName : name
             }   
@@ -181,4 +182,4 @@ class ProductProvider extends Component {
 
 const ProductConsumer = ProductContext.Consumer;
 
-export { ProductProvider, ProductConsumer };
+export { ProductProvider, ProductConsumer, ProductContext };

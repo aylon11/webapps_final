@@ -3,7 +3,7 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
 import Cookies from "js-cookie";
-import { ProductConsumer, setName } from '../context';
+import { ProductConsumer, ProductContext } from '../context';
 
 
 export default function Register() {
@@ -12,9 +12,8 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
   const Auth = React.useContext(AuthApi)
 
-  const[context,setContext] = useContext(Context)
 
-
+  const valueContext = React.useContext(ProductContext)
 
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
@@ -40,12 +39,11 @@ export default function Register() {
         console.log('set auth to true')
       }
       return response.json();
-    }).then((data)=>{
-      setName(data['name'])
-      // data['name']
-      // data['cart']
-      console.log(data['name'])
-      window.location.href="http://localhost:3000/products"
+      // console.log(data['name'])
+      // valueContext.setName(data['name'])
+    }).then( function (data){
+      valueContext.setName(data['name'])
+      debugger
     })
   }
 
