@@ -11,48 +11,18 @@ import AboutUs from './components/AboutUs';
 import Register from './components/Register';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AuthApi from "./AuthApi";
-import isRegApi from "./isRegApi"
 import Cookies from "js-cookie"
-
-// class App extends Component {
-
-//   constructor() {
-//     super();
-//     this.state = {
-//       name: "React",
-//       isUserAuthenticated: false
-//     };
-//   }
-
-//   isUserAuthenticatedChange
-
-//   render() {
-//     const [auth,setAuth] = React.useState(false)
-//     return (
-//       <div>
-//         <AuthApi.Provider value={{auth,setAuth}}>
-//         <Router>
-//           <Routes/>
-//         </Router>
-//         </AuthApi.Provider>
-//       </div>
-//     );
-//   }
-// }
 
 
 function App(){
   
   const [auth,setAuth] = React.useState(false)
-  const [isRegPage, setRegPage] = React.useState(true)
-  // const isReg = React.useContext(isRegApi)
 
 
   const readCookie = () =>{
     const user = Cookies.get("user");
     if(user){
       setAuth(true);
-      setRegPage(false);
     }
   }
 
@@ -73,10 +43,9 @@ function App(){
 
 const Routes = () => {
   const Auth = React.useContext(AuthApi)
-  const Reg = React.useContext(isRegApi)
   return (
     <React.Fragment>
-      {!Reg? null :<Navbar />}
+      <Navbar/>
       <Switch>
       <Route
             exact

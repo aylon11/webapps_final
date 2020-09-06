@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../Logo1.png'
 import { ButtonContainer } from './Button';
+import Cookies from "js-cookie"
 
 export default class NavBar extends Component {
     render() {
@@ -31,7 +32,7 @@ export default class NavBar extends Component {
                     </ButtonContainer>
                 </Link>
                 <Link to="/Register">
-                    <ButtonContainer style={{ color: "var(--mainRed)", marginLeft: "20px", fontSize: "1.2rem" }}>
+                    <ButtonContainer  onClick={signOut} style={{ color: "var(--mainRed)", marginLeft: "20px", fontSize: "1.2rem" }}>
                         <span className="mr-3">
                             <i className="fas fa-sign-in-alt"></i>
                         </span>
@@ -45,4 +46,10 @@ export default class NavBar extends Component {
             </nav>
         )
     }
+}
+
+function signOut(){
+    Cookies.remove('user');
+    
+    window.location.href="http://localhost:3000/register"
 }

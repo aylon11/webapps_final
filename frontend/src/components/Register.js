@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
-import isRegApi from "../isRegApi"
 import Cookies from "js-cookie"
 
 
@@ -11,7 +10,6 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const Auth = React.useContext(AuthApi)
-  const Reg = React.useContext(isRegApi)
 
 
   function validateForm() {
@@ -33,7 +31,7 @@ export default function Register() {
     }).then(function (response) {
       if (response.status === 200){
         Auth.setAuth(true)
-        Reg.setRegPage(false)
+        // Reg.setRegPage(false)
         Cookies.set("user",name, {expires:7})
         console.log('set auth to true')
       }
