@@ -38,7 +38,8 @@ exports.add_user = (req, res, next) => {
 
   client.hgetall(id, function(err,obj){
     if (obj){
-        res.send('User name already exists')
+        res.status(404)
+        res.send({"msg":"User name already exists"})
     }
     else{
         client.hmset(id,['pwd',pwd,'cart',cart,'create_time',login_time], function(err,reply){
@@ -47,7 +48,7 @@ exports.add_user = (req, res, next) => {
             }
             console.log(reply);
             // redirect to home page after registration
-            res.send('new user added');
+            res.send({"msg":"New User Created!", "name": id });
         })
     }
   })
