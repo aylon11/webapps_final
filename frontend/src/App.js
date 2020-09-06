@@ -11,30 +11,31 @@ import AboutUs from './components/AboutUs';
 import Register from './components/Register';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AuthApi from "./AuthApi";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
+import { ProductConsumer } from './context'
 
 
-function App(){
-  
-  const [auth,setAuth] = React.useState(false)
+function App() {
+
+  const [auth, setAuth] = React.useState(false)
 
 
-  const readCookie = () =>{
+  const readCookie = () => {
     const user = Cookies.get("user");
-    if(user){
+    if (user) {
       setAuth(true);
     }
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     readCookie();
-  },[])
+  }, [])
   return (
     <div>
-      <AuthApi.Provider value={{auth,setAuth}}>
-      <Router>
-        <Routes/>
-      </Router>
+      <AuthApi.Provider value={{ auth, setAuth }}>
+        <Router>
+          <Routes />
+        </Router>
       </AuthApi.Provider>
     </div>
   )
@@ -45,22 +46,27 @@ const Routes = () => {
   const Auth = React.useContext(AuthApi)
   return (
     <React.Fragment>
-      <Navbar/>
+
+      {/* <ProductConsumer>
+        {(value) =>
+          value.isNavBar ? null : <Navbar />}
+      </ProductConsumer> */}
+      <Navbar />
       <Switch>
-      <Route
-            exact
-            path="/"
-            render={() => {
-              return (
-                  <Redirect to="/products" component={ProductList} />
-              )
-            }}
-          />
-        <ProtectedRoute exact path="/products" auth={Auth.auth} component={ProductList}/>
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return (
+              <Redirect to="/products" component={ProductList} />
+            )
+          }}
+        />
+        <ProtectedRoute exact path="/products" auth={Auth.auth} component={ProductList} />
         <Route path="/about" component={AboutUs}></Route>
         <Route path="/details" component={Details}></Route>
-        <ProtectedRoute path="/cart" auth={Auth.auth} component={Cart}/>
-        <ProtectedReg path="/register" auth={Auth.auth} component={Register}/>
+        <ProtectedRoute path="/cart" auth={Auth.auth} component={Cart} />
+        <ProtectedReg path="/register" auth={Auth.auth} component={Register} />
         <Route component={Default}></Route>
       </Switch>
       <Modal />
@@ -69,32 +75,32 @@ const Routes = () => {
 
 }
 
-const ProtectedRoute = ({auth, component: Component, ...rest}) =>{
-  return(
+const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
+  return (
     <Route
-    {...rest}
-    render ={()=> auth?(
-    <Component/>
-    ):
-    (
-      <Redirect to="/register"/>
-    )
-  }
+      {...rest}
+      render={() => auth ? (
+        <Component />
+      ) :
+        (
+          <Redirect to="/register" />
+        )
+      }
     />
   )
 }
 
-const ProtectedReg = ({auth, component: Component, ...rest}) =>{
-  return(
+const ProtectedReg = ({ auth, component: Component, ...rest }) => {
+  return (
     <Route
-    {...rest}
-    render ={()=> !auth?(
-    <Component/>
-    ):
-    (
-      <Redirect to="/products"/>
-    )
-  }
+      {...rest}
+      render={() => !auth ? (
+        <Component />
+      ) :
+        (
+          <Redirect to="/products" />
+        )
+      }
     />
   )
 }
