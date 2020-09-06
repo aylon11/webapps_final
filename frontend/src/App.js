@@ -6,20 +6,41 @@ import ProductList from './components/ProductList';
 import Details from './components/Details';
 import Cart from './components/Cart';
 import Default from './components/Default';
-import SignIn from './components/SignIn';
 import Modal from './components/Modal';
 import AboutUs from './components/AboutUs';
 import Register from './components/Register';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      name: "React",
+      isUserAuthenticated: false
+    };
+  }
+
+  isUserAuthenticatedChange
+
   render() {
     return (
       <React.Fragment>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={ProductList}></Route>
-          <Route path="/sign" component={SignIn}></Route>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return (
+                this.state.isUserAuthenticated ?
+                  <Redirect to="/products" component={ProductList} /> :
+                  <Redirect to="/register" component={Register} />
+              )
+            }}
+          />
+          <Route exact path="/products" component={ProductList}></Route>
           <Route path="/about" component={AboutUs}></Route>
           <Route path="/details" component={Details}></Route>
           <Route path="/cart" component={Cart}></Route>

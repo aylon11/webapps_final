@@ -18,15 +18,16 @@ export default class ProductList extends Component {
 
             this.setState({
                 inputValue: event.target.value,
-                products: filteredProducts
+                products: this.state.products.filter(product => {
+                    return product.title.toLowerCase().includes(this.state.inputValue.toLocaleLowerCase())
+                })
             })
-            debugger
         }
 
-        const filteredProducts =
-        this.state.products.filter(product => {
-            return product.title.toLowerCase().includes(this.state.inputValue.toLocaleLowerCase())
-        })
+        // const filteredProducts =
+        //     this.state.products.filter(product => {
+        //         return product.title.toLowerCase().includes(this.state.inputValue.toLocaleLowerCase())
+        //     })
 
 
         return (
@@ -36,13 +37,17 @@ export default class ProductList extends Component {
                         <Title name="Our " title="Products" />
                         <input className="search-bar" placeholder="Search for..." value={this.state.inputValue} onChange={productsFilterOnChange.bind(this)} />
                         <div className="row">
-                            <ProductConsumer>
-                                {value => {
-                                    return value.products.map(product => {
-                                        return <Product key={product.id} product={product} />;
-                                    })
-                                }}
-                            </ProductConsumer>
+                            {this.state.inputValue !== "" ? this.state.products.map(product => {
+                                return <Product key={product.id} product={product} />
+                            }) :
+                                <ProductConsumer>
+                                    {value => {
+                                        this.state.products = value.products;
+                                        return value.products.map(product => {
+                                            return <Product key={product.id} product={product} />;
+                                        })
+                                    }}
+                                </ProductConsumer>}
                         </div>
                     </div>
                 </div>

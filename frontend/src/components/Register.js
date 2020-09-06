@@ -8,7 +8,7 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
 
   function validateForm() {
-    return name.length > 0 && password.length > 0 && password2.length > 0;
+    return name.length > 0 && password.length > 0 && password2 === password;
   }
 
   function handleSubmit(event) {
@@ -68,6 +68,7 @@ export default function Register() {
         <ButtonContainer style={{ background: "var(--mainBlue)" }} block bsSize="large" disabled={!validateForm()} type="submit">
           Login
         </ButtonContainer>
+
       </form>
     </div>
   );
