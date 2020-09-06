@@ -36,7 +36,8 @@ export default function Register() {
         console.log('set auth to true')
       }
       return response.json();
-    }).then(()=>{
+    }).then((data)=>{
+      console.log(data['name'])
       window.location.href="http://localhost:3000/products"
     })
   }

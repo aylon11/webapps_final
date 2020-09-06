@@ -48,7 +48,7 @@ exports.add_user = (req, res, next) => {
             }
             console.log(reply);
             // redirect to home page after registration
-            res.send({"msg":"New User Created!", "name": id });
+            res.send({"msg":"New User Created!", "name": id ,"cart": cart});
         })
     }
   })
