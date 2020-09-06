@@ -30,7 +30,7 @@ export default class NavBar extends Component {
                         My Cart
                     </ButtonContainer>
                 </Link>
-                <Link to="/sign">
+                <Link to="/Register">
                     <ButtonContainer style={{ color: "var(--mainRed)", marginLeft: "20px", fontSize: "1.2rem" }}>
                         <span className="mr-3">
                             <i className="fas fa-sign-in-alt"></i>
