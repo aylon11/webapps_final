@@ -76,12 +76,12 @@ class ProductProvider extends Component {
             method: 'put',
             body: JSON.stringify(_body),
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
+                Accept: "application/json",
+                "Content-Type": "application/json"
             }
-          }).then(function (response) {
-              console.log(response)
-          })
+        }).then(function (response) {
+            console.log(response)
+        })
     }
 
     componentDidMount() {
@@ -118,8 +118,8 @@ class ProductProvider extends Component {
         product.total = price;
         this.setState(() => {
             return { products: tempProducts, cart: [...this.state.cart, product] };
-        }, () => { 
-            this.addTotal() 
+        }, () => {
+            this.addTotal()
             this.sendDataToBack()
         });
     };

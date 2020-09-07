@@ -4,9 +4,14 @@ import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
 import Cookies from "js-cookie";
 import { ProductConsumer, ProductContext } from '../context';
+import Title from './Title';
+import Logo from '../Logo1.png';
+import Background from '../backgroundSocks.jpg'
+
+
 
 var rememberMe = false;
-var in30Minutes = 1/48;
+var in30Minutes = 1 / 48;
 var isLogIn = false;
 
 export default function Register() {
@@ -50,15 +55,15 @@ export default function Register() {
         callSuccess = true
         Auth.setAuth(true)
         var expTime = 7;
-        if (rememberMe){
+        if (rememberMe) {
           expTime = in30Minutes
         }
         Cookies.set("user", name, { expires: expTime })
         console.log('set auth to true')
       }
       return response.json();
-    }).then( function (data){
-      if (callSuccess){
+    }).then(function (data) {
+      if (callSuccess) {
         valueContext.setName(data['name'])
         valueContext.setCart(data['cart'])
         valueContext.presentNavBar(true);
@@ -86,7 +91,10 @@ export default function Register() {
     <ProductConsumer>
       {(value) => (
 
-        <div className="Login col-10 mx-auto text-center text-title" style={{ width: "40%", marginTop: "5%" }}>
+        <div className="Login col-10 mx-auto text-center text-title" style={{ width: "40%", marginTop: "5%", backgroundImage: `url(${Background})`, padding: "30px", borderRadius: "35px", border: "solid 1px gray" }}>
+          <Title name="Welcom " title="to" />
+          <img src={Logo} alt="SOCKIT" style={{ paddingBottom: "50px" }} />
+
           <form onSubmit={handleSubmit}>
             <FormGroup controlId="email" bsSize="large">
               <ControlLabel>Name</ControlLabel>
@@ -116,7 +124,7 @@ export default function Register() {
             <ButtonContainer onClick={() => { isLogIn = true }} style={{ background: "var(--mainBlue)" }} block bsSize="large" disabled={!validateForm()} type="submit">
               Log In
             </ButtonContainer>
-            <ButtonContainer onClick={() => { isLogIn = false }} style={{ marginLeft: "30px", background: "var(--mainOrange)" }} block bsSize="large" disabled={!validateForm()} type="submit">
+            <ButtonContainer onClick={() => { isLogIn = false }} style={{ marginLeft: "30px", background: "var(--mainRed)" }} block bsSize="large" disabled={!validateForm()} type="submit">
               Sign Up
             </ButtonContainer>
             <span>
@@ -124,11 +132,11 @@ export default function Register() {
             </span>
 
             {msg == "" ? null :
-            <Alert style={{ marginTop: "30px" }} variant="danger">
-              <p>
-                {msg}
-              </p>
-            </Alert>}
+              <Alert style={{ marginTop: "30px" }} variant="danger">
+                <p style={{margin: "1rem"}}>
+                  {msg}
+                </p>
+              </Alert>}
 
           </form>
         </div>
