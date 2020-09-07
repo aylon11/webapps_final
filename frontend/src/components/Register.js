@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel, Form, Checkbox } from "react-bootstrap";
 import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
 import Cookies from "js-cookie";
 import { ProductConsumer, ProductContext } from '../context';
 
+var rememberMe = false;
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -14,10 +15,15 @@ export default function Register() {
 
   const valueContext = React.useContext(ProductContext)
 
+
+  function clickedRememberMe(event) {
+    rememberMe = event.target.checked;
+    console.log(rememberMe);
+  }
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
   }
- 
+
   function handleSubmit(event) {
     event.preventDefault();
     var _body = {
@@ -80,7 +86,10 @@ export default function Register() {
             </FormGroup>
             <ButtonContainer style={{ background: "var(--mainOrange)" }} block bsSize="large" disabled={!validateForm()} type="submit">
               Login
-        </ButtonContainer>
+            </ButtonContainer>
+            <span>
+              <Checkbox onChange={clickedRememberMe} disabled={!validateForm()} style={{ textTransform: "capitalize", display: "inline-block", marginLeft: "44px", fontSize: "14px" }} type="checkbox" value="Remember Me" label="Remember Me" > Remember Me </Checkbox>
+            </span>
 
           </form>
         </div>
