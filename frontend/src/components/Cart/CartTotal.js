@@ -32,6 +32,9 @@ export default function CartTotal({ value }) {
                                 </span>
                             </h5>
                         </div>
+                        <button style={{ background: "var(--mainGreen)", marginTop: "15px" }} className="btn text-uppercase mb-3 px-5" type="button" onClick={() => { window.open('https://www.paypal.com','_blank')}}>
+                            Pay ${cartTotal}
+                        </button>
                     </div>
                 </div>
             </div>

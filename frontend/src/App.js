@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
@@ -16,9 +16,6 @@ import Cookies from "js-cookie";
 import { ProductConsumer, ProductContext } from './context'
 
 
-const userName = React.createContext("user")
-const cart = React.createContext("[]")
-
 function App() {
 
   const [auth, setAuth] = React.useState(false)
@@ -33,33 +30,35 @@ function App() {
       valueContext.presentNavBar(true)
 
       fetch(`http://localhost:4000/user/cart/${user}`, {
-      method: 'get',
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }}).then(function (response) {
+        method: 'get',
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }).then(function (response) {
         return response.json();
-      }).then( function (data){
+      }).then(function (data) {
         valueContext.setCart(data['cart'])
         valueContext.addTotal()
       })
-      if (user==="admin"){
-          fetch(`http://localhost:4000/users`, {
+      if (user === "admin") {
+        fetch(`http://localhost:4000/users`, {
           method: 'get',
           headers: {
-           Accept: "application/json",
-           "Content-Type": "application/json"
-          }}).then(function (res){
-            return res.json();
-          }).then( function (users_data){
-              valueContext.setUsers(users_data['users'])
-          })
-        }
-      
-    
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }).then(function (res) {
+          return res.json();
+        }).then(function (users_data) {
+          valueContext.setUsers(users_data['users'])
+        })
+      }
+
+
     }
   }
-      
+
 
   React.useEffect(() => {
     readCookie();
