@@ -29,8 +29,23 @@ function App() {
     if (user) {
       setAuth(true);
       valueContext.setName(user)
+      valueContext.presentNavBar(true)
+
+      fetch(`http://localhost:4000/user/cart/${user}`, {
+      method: 'get',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }}).then(function (response) {
+        return response.json();
+      }).then( function (data){
+        valueContext.setCart(data['cart'])
+        valueContext.addTotal()
+      })
+    
     }
   }
+      
 
   React.useEffect(() => {
     readCookie();
@@ -108,5 +123,6 @@ const ProtectedReg = ({ auth, component: Component, ...rest }) => {
     />
   )
 }
+
 
 export default App;

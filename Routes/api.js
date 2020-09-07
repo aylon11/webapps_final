@@ -25,4 +25,7 @@ Route.put('/user/update', redis.update_user)
 // sign-in user
 Route.post('/user/sign-in', redis.sign_in)
 
+// get a user's cart
+Route.get('/user/cart/:id', redis.get_cart)
+
 module.exports = Route
