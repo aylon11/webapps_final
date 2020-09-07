@@ -28,6 +28,7 @@ export default function Register() {
   }
 
   function handleSubmit(event) {
+    var callSuccess = false
     var extension = 'add'
     if (isLogIn) {
       extension = 'sign-in'
@@ -46,6 +47,7 @@ export default function Register() {
       }
     }).then(function (response) {
       if (response.status === 200) {
+        callSuccess = true
         Auth.setAuth(true)
         var expTime = 7;
         if (rememberMe){
@@ -56,10 +58,12 @@ export default function Register() {
       }
       return response.json();
     }).then( function (data){
-      valueContext.setName(data['name'])
-      var cart = JSON.parse(data['cart'])
-      valueContext.setCart(cart)
-      updateMsg("dddd")
+      if (callSuccess){
+        valueContext.setName(data['name'])
+        var cart = JSON.parse(data['cart'])
+        valueContext.setCart(cart)
+      }
+      updateMsg(data['msg'])
       debugger
     })
   }

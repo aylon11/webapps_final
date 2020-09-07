@@ -26,7 +26,7 @@ client.on('connect', function(err){
     client.flushdb( function (err, succeeded) {
         console.log(succeeded); // will be true if successfull
     });
-    client.hmset('admin',['pwd','admin'], function(err){
+    client.hmset('admin',['pwd','admin','cart','[]'], function(err){
         if(err){
             console.log('Error in creating admin user ' + err)
         }
@@ -36,7 +36,6 @@ client.on('connect', function(err){
     });
     }
 });
-
 
 
 
@@ -68,55 +67,6 @@ app.use((req, res) => {
     res.send('endpoint not found')
   })
   
-
-// // Search User
-// app.post('/user/search', function(req,res,next){
-//     let id = req.body.id;
-// })
-
-
-// // Log-in and sign-in page
-// app.get('/user/reg', function(req,res,next){
-//     res.render('reg');
-// })
-
-
-// // Add User process
-// app.post('/user/add/:name/:pwd', function(req,res,next){
-//     let user_name = req.params.name;
-//     let pwd = parseInt(req.params.pwd);
-
-//     console.log(user_name, pwd)
-//     // Check if user name is taken. If not, register new user
-//     client.hgetall(user_name, function(err,obj){
-//         if (obj){
-//             res.send('User name already exists')
-//         }
-//         else{
-//             client.hmset(user_name,['password',pwd], function(err,reply){
-//                 if (err){
-//                     console.log(err)
-//                 }
-//                 console.log(reply);
-//                 // redirect to home page after registration
-//                 res.send('new user added');
-//             })
-//         }
-//     })
-// })
-
-
-// // test route to get a password of a given user
-// app.get('/user/get/:name', function(req, res, next){
-//     let name = req.params.name;
-//     client.hgetall(name, function(err, obj){
-//         // console.log(obj)
-//         res.send(obj)
-//   });
-// })
-
-
-
 
 // Start server
 app.listen(port, function(){
