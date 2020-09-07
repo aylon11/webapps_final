@@ -68,28 +68,6 @@ exports.delete_user = (req, res, next) => {
   })
 }
 
-// exports.get_user = (req, res, next) => {
-//   // id from url Parameter
-//   let id = req.body.id
-//   let pwd = req.body.pwd
-
-//   // get all values associated with the key as id
-//   client.hgetall(id, (err, obj) => {
-//     if (!obj) {
-//       res.send('User does not exist') // if no user is associated with that id/key return this
-//     } else {    
-//       if (obj.pwd == pwd){
-//         res.send({
-//           'user': obj // if user is found return details
-//         })
-//       }
-//       else{
-//         res.status(404);
-//         res.send('Wrong Password')
-//       }
-//     }
-//   })
-// }
 
 exports.update_user = (req, res, next) => {
   // put Parameters
@@ -103,6 +81,8 @@ exports.update_user = (req, res, next) => {
   ], (err, reply) => {
     if (err) {
       console.log(err)  // callback to log errors
+      res.status(404)
+      res.send("Couldn't update cart")
     }
     else{
       console.log(reply)  // log success message

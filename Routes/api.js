@@ -13,12 +13,6 @@ Route.get('/users', redis.get_all_users)
 // add a new user
 Route.post('/user/add', redis.add_user)
 
-// delete a user
-Route.delete('/user/delete/:id', redis.delete_user)
-
-// get a user by id
-// Route.post('/user/:id', redis.get_user)
-
 // update a user by id
 Route.put('/user/update', redis.update_user)
 
