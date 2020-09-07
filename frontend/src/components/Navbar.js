@@ -47,6 +47,11 @@ export default class NavBar extends Component {
                         Sign Out
                     </ButtonContainer>
                         </Link>
+                        {value.userName == "admin" ? null : <Link to="/admin">
+                            <ButtonContainer style={{ color: "var(--mainPurple)", marginLeft: "20px", fontSize: "1.2rem" }}>
+                                Admin Page
+                            </ButtonContainer>
+                        </Link>}
                         <div style={{ marginLeft: "40px" }}>
                             <span style={{ fontSize: "1.2rem", color: "var(--mainDarkBlue)" }}>Hello,</span><br />
                             <span style={{ fontSize: "1rem" }}>{value.userName}</span>

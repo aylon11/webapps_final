@@ -24,12 +24,6 @@ export default class ProductList extends Component {
             })
         }
 
-        // const filteredProducts =
-        //     this.state.products.filter(product => {
-        //         return product.title.toLowerCase().includes(this.state.inputValue.toLocaleLowerCase())
-        //     })
-
-
         return (
             <React.Fragment>
                 <div className="py-5">
