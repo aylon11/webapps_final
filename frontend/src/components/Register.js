@@ -54,9 +54,9 @@ export default function Register() {
       if (response.status === 200) {
         callSuccess = true
         Auth.setAuth(true)
-        var expTime = 7;
+        var expTime = in30Minutes;
         if (rememberMe) {
-          expTime = in30Minutes
+          expTime = 7
         }
         Cookies.set("user", name, { expires: expTime })
         console.log('set auth to true')
