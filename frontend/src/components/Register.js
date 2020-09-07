@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { FormGroup, FormControl, ControlLabel, Form, Checkbox } from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel, Checkbox, Alert } from "react-bootstrap";
 import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
 import Cookies from "js-cookie";
@@ -10,6 +10,7 @@ var isLogIn = false;
 
 export default function Register() {
   const [name, setName] = useState("");
+  const [msg, updateMsg] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const Auth = React.useContext(AuthApi)
@@ -20,7 +21,7 @@ export default function Register() {
 
   function clickedRememberMe(event) {
     rememberMe = event.target.checked;
-    console.log(rememberMe);
+    msg= "sfklsdjflksdjf";
   }
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
@@ -28,7 +29,7 @@ export default function Register() {
 
   function handleSubmit(event) {
     var extension = 'add'
-    if (isLogIn){
+    if (isLogIn) {
       extension = 'sign-in'
     }
     event.preventDefault();
@@ -54,6 +55,7 @@ export default function Register() {
       // valueContext.setName(data['name'])
     }).then(function (data) {
       valueContext.setName(data['name'])
+      updateMsg("dddd")
       debugger
     })
   }
@@ -97,8 +99,15 @@ export default function Register() {
               Sign Up
             </ButtonContainer>
             <span>
-              <Checkbox onChange={clickedRememberMe} disabled={!validateForm()} style={{ textTransform: "capitalize", display: "inline-block", marginLeft: "44px", fontSize: "14px" }} type="checkbox" value="Remember Me" label="Remember Me" > Remember Me </Checkbox>
+              <Checkbox onChange={clickedRememberMe} disabled={!validateForm()} style={{ textTransform: "capitalize", display: "inline-block", marginLeft: "30px", fontSize: "14px" }} type="checkbox" value="Remember Me" label="Remember Me" > Remember Me </Checkbox>
             </span>
+
+            {msg == "" ? null :
+            <Alert style={{ marginTop: "30px" }} variant="danger">
+              <p>
+                {msg}
+              </p>
+            </Alert>}
 
           </form>
         </div>
