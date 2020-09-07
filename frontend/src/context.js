@@ -38,30 +38,6 @@ class ProductProvider extends Component {
                 count: 0,
                 total: 0
             }]
-        },
-        {
-            userName: "Daviddfdfd", creationDate: "02/05/20", password: "daddddddda", cart: [{
-                id: 1,
-                title: "Space Cat Sock",
-                img: "img/socks1.jpg",
-                price: 29,
-                info: "Add a little (solar) flair to your wardrobe with the Space Cat low sock. It won’t go near water, but the infinite, ever-expanding void we call the universe is a doddle when you’re Space Cat.",
-                inCart: false,
-                sizes: "S M L",
-                count: 0,
-                total: 0
-            },
-            {
-                id: 2,
-                title: "Bavaria Duck Sock",
-                img: "img/socks2.jpg",
-                price: 39,
-                info: "Prepare for the wurst! The duck is back, now with a background with the traditional bavarian motif perfectly fitting any Oktoberfest feast!",
-                inCart: false,
-                sizes: "S M L",
-                count: 0,
-                total: 0
-            }]
         }],
     };
 
@@ -74,12 +50,12 @@ class ProductProvider extends Component {
             method: 'put',
             body: JSON.stringify(_body),
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
+                Accept: "application/json",
+                "Content-Type": "application/json"
             }
-          }).then(function (response) {
-              console.log(response)
-          })
+        }).then(function (response) {
+            console.log(response)
+        })
     }
 
     componentDidMount() {
@@ -116,8 +92,8 @@ class ProductProvider extends Component {
         product.total = price;
         this.setState(() => {
             return { products: tempProducts, cart: [...this.state.cart, product] };
-        }, () => { 
-            this.addTotal() 
+        }, () => {
+            this.addTotal()
             this.sendDataToBack()
         });
     };
