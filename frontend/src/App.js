@@ -12,7 +12,8 @@ import Register from './components/Register';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AuthApi from "./AuthApi";
 import Cookies from "js-cookie";
-import { ProductConsumer } from './context'
+import { ProductConsumer,ProductContext } from './context'
+
 
 const userName = React.createContext("user")
 const cart = React.createContext("[]")
@@ -20,12 +21,14 @@ const cart = React.createContext("[]")
 function App() {
 
   const [auth, setAuth] = React.useState(false)
+  const valueContext = React.useContext(ProductContext)
 
 
   const readCookie = () => {
     const user = Cookies.get("user");
     if (user) {
       setAuth(true);
+      valueContext.setName(user)
     }
   }
 

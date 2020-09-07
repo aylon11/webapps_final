@@ -12,7 +12,6 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
   const Auth = React.useContext(AuthApi)
 
-
   const valueContext = React.useContext(ProductContext)
 
   function validateForm() {
@@ -39,10 +38,10 @@ export default function Register() {
         console.log('set auth to true')
       }
       return response.json();
-      // console.log(data['name'])
-      // valueContext.setName(data['name'])
     }).then( function (data){
       valueContext.setName(data['name'])
+      var cart = JSON.parse(data['cart'])
+      valueContext.setCart(cart)
       debugger
     })
   }

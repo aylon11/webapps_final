@@ -152,13 +152,18 @@ class ProductProvider extends Component {
 
     setName = (name) =>{
         this.setState(() =>{
-
             return{
             userName : name
-            }   
-         }
-        )
+            }})
     }
+
+    setCart = (cart) =>{
+        this.setState(() =>{
+            return{
+            cart : cart
+            }})
+    }
+
 
     render() {
         return (
@@ -173,6 +178,7 @@ class ProductProvider extends Component {
                 removeItem: this.removeItem,
                 clearCart: this.clearCart,
                 setName: this.setName,
+                setCart: this.setCart
             }}>
                 {this.props.children}
             </ProductContext.Provider>

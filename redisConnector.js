@@ -34,7 +34,7 @@ exports.add_user = (req, res, next) => {
   // Sign up a new user
   let id = req.body.id
   let pwd = req.body.pwd
-  let cart = String([])
+  let cart = '["item1", "item2"]'
 
   client.hgetall(id, function(err,obj){
     if (obj){
