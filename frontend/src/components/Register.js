@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { ProductConsumer, ProductContext } from '../context';
 
 var rememberMe = false;
+var in30Minutes = 1/48;
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -40,7 +41,11 @@ export default function Register() {
     }).then(function (response) {
       if (response.status === 200) {
         Auth.setAuth(true)
-        Cookies.set("user", name, { expires: 7 })
+        var expTime = 7;
+        if (rememberMe){
+          expTime = in30Minutes
+        }
+        Cookies.set("user", name, { expires: expTime })
         console.log('set auth to true')
       }
       return response.json();
