@@ -7,7 +7,6 @@ export default class UserDetails extends Component {
 
     render() {
         const { userName, creationDate, password, cart } = this.props.user;
-        console.log(userName, creationDate, password, cart);
 
         return (
             <ProductWrapper className="container-fluid text-left d-none d-lg-block card" style={{ width: "50%", padding: "25px 1px 25px 0px", marginTop: "15px" }}>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { FormGroup, FormControl, ControlLabel, Checkbox, Alert } from "react-bootstrap";
 import { ButtonContainer } from './Button';
 import AuthApi from "../AuthApi";
@@ -131,7 +131,7 @@ export default function Register() {
               <Checkbox onChange={clickedRememberMe} disabled={!validateForm()} style={{ textTransform: "capitalize", display: "inline-block", marginLeft: "30px", fontSize: "14px" }} type="checkbox" value="Remember Me" label="Remember Me" > Remember Me </Checkbox>
             </span>
 
-            {msg == "" ? null :
+            {msg === "" ? null :
               <Alert style={{ marginTop: "30px" }} variant="danger">
                 <p style={{margin: "1rem"}}>
                   {msg}
