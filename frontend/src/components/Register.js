@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { ProductConsumer, ProductContext } from '../context';
 
 var rememberMe = false;
+var isLogIn = false;
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -26,12 +27,16 @@ export default function Register() {
   }
 
   function handleSubmit(event) {
+    var extension = 'add'
+    if (isLogIn){
+      extension = 'sign-in'
+    }
     event.preventDefault();
     var _body = {
       id: name,
       pwd: password,
     }
-    fetch('http://localhost:4000/user/add', {
+    fetch(`http://localhost:4000/user/${extension}`, {
       method: 'post',
       body: JSON.stringify(_body),
       headers: {
@@ -85,8 +90,11 @@ export default function Register() {
                 type="password"
               />
             </FormGroup>
-            <ButtonContainer style={{ background: "var(--mainOrange)" }} block bsSize="large" disabled={!validateForm()} type="submit">
-              Login
+            <ButtonContainer onClick={() => { isLogIn = true }} style={{ background: "var(--mainBlue)" }} block bsSize="large" disabled={!validateForm()} type="submit">
+              Log In
+            </ButtonContainer>
+            <ButtonContainer onClick={() => { isLogIn = false }} style={{ marginLeft: "30px", background: "var(--mainOrange)" }} block bsSize="large" disabled={!validateForm()} type="submit">
+              Sign Up
             </ButtonContainer>
             <span>
               <Checkbox onChange={clickedRememberMe} disabled={!validateForm()} style={{ textTransform: "capitalize", display: "inline-block", marginLeft: "44px", fontSize: "14px" }} type="checkbox" value="Remember Me" label="Remember Me" > Remember Me </Checkbox>
