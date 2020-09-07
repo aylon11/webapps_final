@@ -56,6 +56,7 @@ export default function Register() {
         Cookies.set("user", name, { expires: expTime })
         console.log('set auth to true')
       }
+      valueContext.presentNavBar(true);
       return response.json();
     }).then( function (data){
       if (callSuccess){

@@ -14,8 +14,12 @@ class ProductProvider extends Component {
         cartTax: 0,
         cartTotal: 0,
         userName: "User Name",
-        isNavBar: true,
+        isNavBar: false,
     };
+
+    sendDataToBack = () => {
+
+    }
 
     componentDidMount() {
         this.setProducts();
@@ -59,7 +63,6 @@ class ProductProvider extends Component {
         this.setState(() => {
             return { modalProduct: product, modalOpen: true }
         })
-
     }
 
     closeModal = () => {
@@ -117,12 +120,10 @@ class ProductProvider extends Component {
             return {
                 cart: [...tempCart],
                 products: [...tempProducts],
-
             };
         }, () => {
             this.addTotal();
         })
-
     }
 
     clearCart = () => {
@@ -150,20 +151,29 @@ class ProductProvider extends Component {
         })
     }
 
-    setName = (name) =>{
-        this.setState(() =>{
-            return{
-            userName : name
-            }})
+    setName = (name) => {
+        this.setState(() => {
+            return {
+                userName: name
+            }
+        })
     }
 
-    setCart = (cart) =>{
-        this.setState(() =>{
-            return{
-            cart : cart
-            }})
+    presentNavBar = (bool) => {
+        this.setState(() => {
+            return {
+                isNavBar: bool
+            }
+        })
     }
 
+    setCart = (cart) => {
+        this.setState(() => {
+            return {
+                cart: cart
+            }
+        })
+    }
 
     render() {
         return (
@@ -178,7 +188,8 @@ class ProductProvider extends Component {
                 removeItem: this.removeItem,
                 clearCart: this.clearCart,
                 setName: this.setName,
-                setCart: this.setCart
+                setCart: this.setCart,
+                presentNavBar: this.presentNavBar,
             }}>
                 {this.props.children}
             </ProductContext.Provider>

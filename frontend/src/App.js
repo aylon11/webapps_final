@@ -12,7 +12,7 @@ import Register from './components/Register';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AuthApi from "./AuthApi";
 import Cookies from "js-cookie";
-import { ProductConsumer,ProductContext } from './context'
+import { ProductConsumer, ProductContext } from './context'
 
 
 const userName = React.createContext("user")
@@ -52,11 +52,10 @@ const Routes = () => {
   return (
     <React.Fragment>
 
-      {/* <ProductConsumer>
+      <ProductConsumer>
         {(value) =>
-          value.isNavBar ? null : <Navbar />}
-      </ProductConsumer> */}
-      <Navbar />
+          value.isNavBar ? <Navbar /> : null}
+      </ProductConsumer>
       <Switch>
         <Route
           exact
