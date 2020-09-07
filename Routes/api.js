@@ -17,12 +17,15 @@ Route.post('/user/add', redis.add_user)
 Route.delete('/user/delete/:id', redis.delete_user)
 
 // get a user by id
-Route.post('/user/:id', redis.get_user)
+// Route.post('/user/:id', redis.get_user)
 
 // update a user by id
 Route.put('/user/update', redis.update_user)
 
 // sign-in user
 Route.post('/user/sign-in', redis.sign_in)
+
+// get a user's cart
+Route.get('/user/cart/:id', redis.get_cart)
 
 module.exports = Route

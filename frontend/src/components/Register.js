@@ -21,13 +21,14 @@ export default function Register() {
 
   function clickedRememberMe(event) {
     rememberMe = event.target.checked;
-    msg= "sfklsdjflksdjf";
   }
+
   function validateForm() {
     return name.length > 0 && password.length > 0 && password2 === password;
   }
 
   function handleSubmit(event) {
+    var callSuccess = false
     var extension = 'add'
     if (isLogIn) {
       extension = 'sign-in'
@@ -46,6 +47,7 @@ export default function Register() {
       }
     }).then(function (response) {
       if (response.status === 200) {
+        callSuccess = true
         Auth.setAuth(true)
         var expTime = 7;
         if (rememberMe){
@@ -54,13 +56,16 @@ export default function Register() {
         Cookies.set("user", name, { expires: expTime })
         console.log('set auth to true')
       }
-      valueContext.presentNavBar(true);
       return response.json();
     }).then( function (data){
-      valueContext.setName(data['name'])
-      var cart = JSON.parse(data['cart'])
-      valueContext.setCart(cart)
-      updateMsg("dddd")
+      if (callSuccess){
+        valueContext.setName(data['name'])
+        valueContext.setCart(data['cart'])
+        valueContext.presentNavBar(true);
+        valueContext.addTotal()
+      }
+      updateMsg(data['msg'])
+      debugger
     })
   }
 

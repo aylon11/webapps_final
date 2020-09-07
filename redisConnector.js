@@ -34,15 +34,16 @@ exports.add_user = (req, res, next) => {
   // Sign up a new user
   let id = req.body.id
   let pwd = req.body.pwd
-  let cart = '["item1", "item2"]'
-
+  let cart = []
+  let cartS = JSON.stringify(cart)
+  
   client.hgetall(id, function(err,obj){
     if (obj){
         res.status(404)
         res.send({"msg":"User name already exists"})
     }
     else{
-        client.hmset(id,['pwd',pwd,'cart',cart,'create_time',login_time], function(err,reply){
+        client.hmset(id,['pwd',pwd,'cart',cartS,'create_time',login_time], function(err,reply){
             if (err){
                 console.log(err)
             }
@@ -67,44 +68,46 @@ exports.delete_user = (req, res, next) => {
   })
 }
 
-exports.get_user = (req, res, next) => {
-  // id from url Parameter
-  let id = req.body.id
-  let pwd = req.body.pwd
+// exports.get_user = (req, res, next) => {
+//   // id from url Parameter
+//   let id = req.body.id
+//   let pwd = req.body.pwd
 
-  // get all values associated with the key as id
-  client.hgetall(id, (err, obj) => {
-    if (!obj) {
-      res.send('User does not exist') // if no user is associated with that id/key return this
-    } else {    
-      if (obj.pwd == pwd){
-        res.send({
-          'user': obj // if user is found return details
-        })
-      }
-      else{
-        res.status(404);
-        res.send('Wrong Password')
-      }
-    }
-  })
-}
+//   // get all values associated with the key as id
+//   client.hgetall(id, (err, obj) => {
+//     if (!obj) {
+//       res.send('User does not exist') // if no user is associated with that id/key return this
+//     } else {    
+//       if (obj.pwd == pwd){
+//         res.send({
+//           'user': obj // if user is found return details
+//         })
+//       }
+//       else{
+//         res.status(404);
+//         res.send('Wrong Password')
+//       }
+//     }
+//   })
+// }
 
 exports.update_user = (req, res, next) => {
   // put Parameters
   let id = req.body.id
   let cart = req.body.cart
+  let cartS = JSON.stringify(cart)
 
   // make id the key and assign the id to the other Parameters
   client.hset(id, [
-    'cart', cart
+    'cart', cartS
   ], (err, reply) => {
     if (err) {
       console.log(err)  // callback to log errors
     }
-
-    console.log(reply)  // log success message
-    res.send("User updated successfully") // response to client
+    else{
+      console.log(reply)  // log success message
+      res.send("User updated successfully") // response to client
+    }
   })
 }
 
@@ -115,17 +118,32 @@ exports.sign_in = (req, res, next) => {
   client.hgetall(id, function(err,obj){
     if (obj){
       if(obj.pwd === pwd){
-          res.status(200)
-          res.send(obj)
+          cart = JSON.parse(obj.cart)
+          res.send({"msg": "Signed In", "name":id, "cart":cart})
       }
       else{
           res.status(404) // wrong pwd
-          res.send('wrong Password')
+          res.send({"msg": "wrong Password"})
       }
     }
     else{
         res.status(400) // User doesn't exist
-        res.send('User doesnt exist')
+        res.send({"msg": "User does not exist"})
+    }
+  })
+}
+
+exports.get_cart = (req, res, next) => {
+  id = req.params.id
+  client.hgetall(id, function(err,obj){
+    if (obj){
+          cart = JSON.parse(obj.cart)
+          res.send({"cart": cart})
+    }
+    else{
+      console.log('error getting cart for client')
+      res.status(404)
+      res.send("could not get the cart for client")
     }
   })
 }

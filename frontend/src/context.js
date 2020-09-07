@@ -66,7 +66,20 @@ class ProductProvider extends Component {
     };
 
     sendDataToBack = () => {
-
+        var _body = {
+            id: this.state.userName,
+            cart: this.state.cart,
+        }
+        fetch(`http://localhost:4000/user/update`, {
+            method: 'put',
+            body: JSON.stringify(_body),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            }
+          }).then(function (response) {
+              console.log(response)
+          })
     }
 
     componentDidMount() {
@@ -103,7 +116,10 @@ class ProductProvider extends Component {
         product.total = price;
         this.setState(() => {
             return { products: tempProducts, cart: [...this.state.cart, product] };
-        }, () => { this.addTotal() });
+        }, () => { 
+            this.addTotal() 
+            this.sendDataToBack()
+        });
     };
 
     openModal = id => {
@@ -132,6 +148,8 @@ class ProductProvider extends Component {
             }
         }, () => {
             this.addTotal()
+            // this.sendDataToBack()
+
         })
     }
 
@@ -238,6 +256,7 @@ class ProductProvider extends Component {
                 setName: this.setName,
                 setCart: this.setCart,
                 presentNavBar: this.presentNavBar,
+                addTotal: this.addTotal
             }}>
                 {this.props.children}
             </ProductContext.Provider>
