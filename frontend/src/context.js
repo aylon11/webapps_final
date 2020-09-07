@@ -15,54 +15,56 @@ class ProductProvider extends Component {
         cartTotal: 0,
         userName: "User Name",
         isNavBar: false,
-        users: [{
-            userName: "David", creationDate: "02/05/20", password: "dada", cart: [{
-                id: 1,
-                title: "Space Cat Sock",
-                img: "img/socks1.jpg",
-                price: 29,
-                info: "Add a little (solar) flair to your wardrobe with the Space Cat low sock. It won’t go near water, but the infinite, ever-expanding void we call the universe is a doddle when you’re Space Cat.",
-                inCart: false,
-                sizes: "S M L",
-                count: 0,
-                total: 0
-            },
-            {
-                id: 2,
-                title: "Bavaria Duck Sock",
-                img: "img/socks2.jpg",
-                price: 39,
-                info: "Prepare for the wurst! The duck is back, now with a background with the traditional bavarian motif perfectly fitting any Oktoberfest feast!",
-                inCart: false,
-                sizes: "S M L",
-                count: 0,
-                total: 0
-            }]
-        },
-        {
-            userName: "Daviddfdfd", creationDate: "02/05/20", password: "daddddddda", cart: [{
-                id: 1,
-                title: "Space Cat Sock",
-                img: "img/socks1.jpg",
-                price: 29,
-                info: "Add a little (solar) flair to your wardrobe with the Space Cat low sock. It won’t go near water, but the infinite, ever-expanding void we call the universe is a doddle when you’re Space Cat.",
-                inCart: false,
-                sizes: "S M L",
-                count: 0,
-                total: 0
-            },
-            {
-                id: 2,
-                title: "Bavaria Duck Sock",
-                img: "img/socks2.jpg",
-                price: 39,
-                info: "Prepare for the wurst! The duck is back, now with a background with the traditional bavarian motif perfectly fitting any Oktoberfest feast!",
-                inCart: false,
-                sizes: "S M L",
-                count: 0,
-                total: 0
-            }]
-        }],
+        users: [
+        //     {
+        //     userName: "David", creationDate: "02/05/20", password: "dada", cart: [{
+        //         id: 1,
+        //         title: "Space Cat Sock",
+        //         img: "img/socks1.jpg",
+        //         price: 29,
+        //         info: "Add a little (solar) flair to your wardrobe with the Space Cat low sock. It won’t go near water, but the infinite, ever-expanding void we call the universe is a doddle when you’re Space Cat.",
+        //         inCart: false,
+        //         sizes: "S M L",
+        //         count: 0,
+        //         total: 0
+        //     },
+        //     {
+        //         id: 2,
+        //         title: "Bavaria Duck Sock",
+        //         img: "img/socks2.jpg",
+        //         price: 39,
+        //         info: "Prepare for the wurst! The duck is back, now with a background with the traditional bavarian motif perfectly fitting any Oktoberfest feast!",
+        //         inCart: false,
+        //         sizes: "S M L",
+        //         count: 0,
+        //         total: 0
+        //     }]
+        // },
+        // {
+        //     userName: "Daviddfdfd", creationDate: "02/05/20", password: "daddddddda", cart: [{
+        //         id: 1,
+        //         title: "Space Cat Sock",
+        //         img: "img/socks1.jpg",
+        //         price: 29,
+        //         info: "Add a little (solar) flair to your wardrobe with the Space Cat low sock. It won’t go near water, but the infinite, ever-expanding void we call the universe is a doddle when you’re Space Cat.",
+        //         inCart: false,
+        //         sizes: "S M L",
+        //         count: 0,
+        //         total: 0
+        //     },
+        //     {
+        //         id: 2,
+        //         title: "Bavaria Duck Sock",
+        //         img: "img/socks2.jpg",
+        //         price: 39,
+        //         info: "Prepare for the wurst! The duck is back, now with a background with the traditional bavarian motif perfectly fitting any Oktoberfest feast!",
+        //         inCart: false,
+        //         sizes: "S M L",
+        //         count: 0,
+        //         total: 0
+        //     }]
+        // }
+    ],
     };
 
     sendDataToBack = () => {
@@ -241,6 +243,21 @@ class ProductProvider extends Component {
         })
     }
 
+    setUsers = (users_input) =>{
+        let user_list = []
+        users_input.map(user => {
+            return user_list.push({"userName":user['id'],
+                                   "creationDate":user['data']['create_time'],
+                                   "password":user['data']['pwd'],
+                                   "cart":JSON.parse(user['data']['cart'])})
+        })
+        this.setState(()=>{
+            return{
+                users: user_list
+            }
+        })
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
@@ -256,7 +273,8 @@ class ProductProvider extends Component {
                 setName: this.setName,
                 setCart: this.setCart,
                 presentNavBar: this.presentNavBar,
-                addTotal: this.addTotal
+                addTotal: this.addTotal,
+                setUsers: this.setUsers
             }}>
                 {this.props.children}
             </ProductContext.Provider>

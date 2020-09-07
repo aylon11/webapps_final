@@ -43,6 +43,19 @@ function App() {
         valueContext.setCart(data['cart'])
         valueContext.addTotal()
       })
+      if (user==="admin"){
+          fetch(`http://localhost:4000/users`, {
+          method: 'get',
+          headers: {
+           Accept: "application/json",
+           "Content-Type": "application/json"
+          }}).then(function (res){
+            return res.json();
+          }).then( function (users_data){
+              valueContext.setUsers(users_data['users'])
+          })
+        }
+      
     
     }
   }

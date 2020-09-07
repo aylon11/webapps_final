@@ -63,9 +63,21 @@ export default function Register() {
         valueContext.setCart(data['cart'])
         valueContext.presentNavBar(true);
         valueContext.addTotal()
+        // populate admin's user data
+        if(data['name'] === 'admin'){
+          fetch(`http://localhost:4000/users`, {
+          method: 'get',
+          headers: {
+           Accept: "application/json",
+           "Content-Type": "application/json"
+          }}).then(function (res){
+            return res.json();
+          }).then( function (users_data){
+              valueContext.setUsers(users_data['users'])
+          })
+        }
       }
       updateMsg(data['msg'])
-      debugger
     })
   }
 

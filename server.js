@@ -26,7 +26,7 @@ client.on('connect', function(err){
     client.flushdb( function (err, succeeded) {
         console.log(succeeded); // will be true if successfull
     });
-    client.hmset('admin',['pwd','admin','cart','[]'], function(err){
+    client.hmset('admin',['pwd','admin','create_time','2000 B.C.','cart','[]'], function(err){
         if(err){
             console.log('Error in creating admin user ' + err)
         }
