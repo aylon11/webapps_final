@@ -54,13 +54,13 @@ export default function Register() {
         Cookies.set("user", name, { expires: expTime })
         console.log('set auth to true')
       }
+      valueContext.presentNavBar(true);
       return response.json();
     }).then( function (data){
       valueContext.setName(data['name'])
       var cart = JSON.parse(data['cart'])
       valueContext.setCart(cart)
       updateMsg("dddd")
-      debugger
     })
   }
 
