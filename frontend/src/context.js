@@ -150,7 +150,7 @@ class ProductProvider extends Component {
             }
         }, () => {
             this.addTotal()
-            // this.sendDataToBack()
+            this.sendDataToBack()
 
         })
     }
@@ -171,6 +171,7 @@ class ProductProvider extends Component {
                 }
             }, () => {
                 this.addTotal()
+                this.sendDataToBack()
             })
         }
     }
@@ -191,6 +192,8 @@ class ProductProvider extends Component {
             };
         }, () => {
             this.addTotal();
+            this.sendDataToBack()
+
         })
     }
 
@@ -200,6 +203,7 @@ class ProductProvider extends Component {
         }, () => {
             this.setProducts();
             this.addTotal();
+            this.sendDataToBack()
         });
     }
 
