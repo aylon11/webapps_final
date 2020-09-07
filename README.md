@@ -16,3 +16,5 @@
 
 6. Start the client
 `npm start`
+
+7. In your browser, go to "localhost:3000"
