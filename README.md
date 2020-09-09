@@ -14,7 +14,13 @@
 
 5. In a different terminal window, cd into "frontend" folder
 
-6. Start the client
+6. Install dependencies and libraries
+`npm install`
+
+7. Start the client
 `npm start`
 
-7. In your browser, go to "localhost:3000"
+8. Start your local redis server
+`redis-server`
+
+9. In your browser, go to "localhost:3000"

@@ -8,6 +8,7 @@ import Cart from './components/Cart';
 import Default from './components/Default';
 import Modal from './components/Modal';
 import AboutUs from './components/AboutUs';
+import ReadMe from './components/readme'
 import Register from './components/Register';
 import AdminPage from './components/AdminPage';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -96,6 +97,7 @@ const Routes = () => {
         />
         <ProtectedRoute exact path="/products" auth={Auth.auth} component={ProductList} />
         <Route path="/about" component={AboutUs}></Route>
+        <Route path="/readme.html" component={ReadMe}></Route>
         <Route path="/admin" component={AdminPage}></Route>
         <Route path="/details" component={Details}></Route>
         <ProtectedRoute path="/cart" auth={Auth.auth} component={Cart} />
